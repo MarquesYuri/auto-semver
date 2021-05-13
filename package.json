@@ -1,0 +1,38 @@
+{
+  "name": "auto-semver",
+  "version": "0.2.0",
+  "description": "Automatic Semantic Versioner",
+  "main": "cli.js",
+  "repository": "https://github.com/MarquesYuri/auto-semver.git",
+  "author": "Marques Yuri de Souza",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "commander": "^7.2.0",
+    "semver": "^7.3.5"
+  },
+  "bin": {
+    "auto-semver": "./lib/cli.js"
+  },
+  "scripts": {
+    "build": "babel src --extensions \".ts\" --out-dir ./lib --copy-files --no-copy-ignored",
+    "refresh": "rm -rf ./node_modules ./package-lock.json && yarn install",
+    "local": "npm link --force && auto-semver -d"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.2",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/app-root-path": "^1.2.4",
+    "@types/commander": "^2.12.2",
+    "@types/node": "^15.0.3",
+    "@types/semver": "^7.3.5",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "eslint": "^7.26.0",
+    "typescript": "^4.2.4"
+  }
+}
