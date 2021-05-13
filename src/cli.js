@@ -31,3 +31,8 @@ if (options.debug) {
 if (options.small) console.log(options);
 
 if (options.pizzaType) console.log(`Sabor: ${options.pizzaType.replace('--', '')}`);
+
+
+// git add .
+// git commit -am "message"
+// git push origin master 

@@ -1,6 +1,6 @@
 {
   "name": "auto-semver",
-  "version": "6.0.0",
+  "version": "2.0.24",
   "description": "Automatic Semantic Versioner",
   "main": "cli.js",
   "repository": "https://github.com/MarquesYuri/auto-semver.git",
@@ -24,6 +24,7 @@
     "@babel/cli": "^7.13.16",
     "@babel/core": "^7.14.2",
     "@babel/node": "^7.14.2",
+    "@babel/plugin-transform-runtime": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-typescript": "^7.13.0",
     "@types/app-root-path": "^1.2.4",

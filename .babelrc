@@ -3,7 +3,9 @@
 		"@babel/preset-env",
 		"@babel/preset-typescript"
 	],
-	"plugins": [],
+	"plugins": [
+		["@babel/plugin-transform-runtime"]
+	],
 	"ignore": [
 		"**/*.config.ts",
 		"**/*.spec.ts",

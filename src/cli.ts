@@ -7,18 +7,22 @@ import semver from 'semver'
 
 import { exec } from 'child_process'
 
+const packageJson = require(rootPath.path + '/package.json')
+const options = commander.opts()
+
 commander
-	.version('1.0.0')
+	.version(packageJson.version)
 	.description('An exemple CLI for auto update version in package.json and commit to github')
 	.option('-m, --major', 'Incremment a major version')
 	.option('-n, --minor', 'Incremment a minor version')
 	.option('-p, --patch', 'Incremment a path version')
-	.option('-a, --add-to-commit <type>', 'Add changes')
-	.option('-c, --auto-commit <type>', 'Commit changes')
+	.option('-o, --only-semver-run', 'No commit')
+	.option('--no-github', 'No push to git')
+	.option('-b, --branch [type]', 'Branch')
+	.option('-a, --add [type]', 'Add')
+	.option('-c, --commit [type]', 'Commit')
+	.option('-p, --push [type]', 'Push')
 	.parse(process.argv)
-
-const packageJson = require(rootPath.path + '/package.json')
-const options = commander.opts()
 
 if (semver.valid(packageJson.version)) {
 	if (options.major) {
@@ -48,5 +52,47 @@ if (semver.valid(packageJson.version)) {
 	}
 }
 
+if (!options.onlySemverRun) {
+	const executions = async () => {
+		await exec(`git branch ${options.branch || 'develop'}`, (err, stdout, stderr) => {
+			if (err) {
+				console.log(`branch stderr: ${stderr}`)
+			} else {
+				console.log(`stdout: ${stdout}`)
+			}
+		})
+		
+		exec(`git checkout ${options.branch || 'develop'}`, (err, stdout, stderr) => {
+			if (err) {
+				console.log(`checkout stderr: ${stderr}`)
+				return
+			} else {
+				console.log(`stdout: ${stdout}`)
+			}
+		})
 
-console.log(packageJson.version)
+		exec(`git add ${options.add || '.'}`, (err, stdout, stderr) => {
+			if (err) {
+				console.log(`add stderr: ${stderr}`)
+				return
+			} else {
+				console.log(`stdout: ${stdout}`)
+			}
+		})
+
+		exec(`git commit -am ${options.commit || 'Automatic commit by auto-semver'}`, (err, stdout, stderr) => {
+			if (err) {
+				console.log(`commit stderr: ${stderr}`)
+				return
+			} else {
+				console.log(`stdout: ${stdout}`)
+			}
+		})
+	}
+
+	executions()
+} else {
+	console.log(options)
+	
+	console.log(packageJson.version)
+}
