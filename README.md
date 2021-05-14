@@ -9,5 +9,6 @@ npm install versioner-cli
 ## Usage
 
 ```bash
-versioner -v
+versioner -V
+versioner -h
 ```
