@@ -12,3 +12,5 @@ npm install versioner-cli
 versioner -V
 versioner -h
 ```
+
+https://zellwk.com/blog/publish-to-npm/
